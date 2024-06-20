@@ -4,27 +4,26 @@
 import re
 import signal
 import sys
-from typing import Dict
 
 
 # set patterns
-ip_p: str = '((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}\
-(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])'
-date_p: str = r'\[\d{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])' + ' ' +\
-                '([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\.\d{6}\]'
-str_p: str = r'"GET /projects/260 HTTP/1\.1"'
-code_p: str = r'[1-5][0-9]{2}'
-size_p: str = r'\d+$'
+ip_p = r'((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}' +\
+        '(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])'
+date_p = r'\[\d{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])' + ' ' +\
+            '([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\.\d{6}\]'
+str_p = r'"GET /projects/260 HTTP/1\.1"'
+code_p = r'[1-5][0-9]{2}'
+size_p = r'\d+$'
 
 # compile the patterns into one
 full_p = re.compile(rf'{ip_p} \- {date_p} {str_p} {code_p} {size_p}')
 
 # read every line from stdin and print out results after 10 lines/ Ctrl + C
-total_size: int = 0
-line_no: int = 0
-stats: Dict[str, int] = {"200": 0, "301": 0, "400": 0,
-                         "401": 0, "403": 0, "404": 0,
-                         "405": 0, "500": 0}
+total_size = 0
+line_no = 0
+stats = {"200": 0, "301": 0, "400": 0,
+         "401": 0, "403": 0, "404": 0,
+         "405": 0, "500": 0}
 
 
 # set handler function for SIGINT
@@ -49,8 +48,8 @@ for line in sys.stdin:
     # update dictionary, size, total_size if a match is found
     if a_match:
         line_args = line.split()
-        status: str = line_args[-2]
-        size: int = int(line_args[-1])
+        status = line_args[-2]
+        size = int(line_args[-1])
         total_size += size
         stats[status] += 1
 
