@@ -19,23 +19,15 @@ def makeChange(coins, total):
     # sort coins in descending order
     coins.sort(reverse=True)
 
-    total_cp = total
     min_coins = 0
     for i in range(len(coins)):
-        for j in range(i, len(coins)):
-            if coins[j] > total:
-                continue
-            quotient = total // coins[j]
-            remainder = total - (quotient * coins[j])
-            min_coins += quotient
-            if remainder == 1 and 1 not in coins:
-                remainder += coins[j]
-                min_coins -= 1
-            if remainder == 0:
-                return min_coins
-            total = remainder
-        # reset min_coins and total
-        min_coins = 0
-        total = total_cp
+        if coins[i] > total:
+            continue
+        quotient = total // coins[i]
+        remainder = total - (quotient * coins[i])
+        min_coins += quotient
+        if remainder == 0:
+            return min_coins
+        total = remainder
 
     return -1
