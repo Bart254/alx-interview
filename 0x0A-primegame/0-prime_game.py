@@ -27,14 +27,16 @@ def isWinner(x, nums):
     ben_wins = 0
 
     # Simulate each round
-    for n in nums:
-        primes_up_to_n = prime_count[n]
+    rounds = 1
+    while rounds <= x:
+        primes_up_to_n = prime_count[nums[rounds - 1]]
 
         # Maria wins if the number of primes is odd, Ben wins if it's even
         if primes_up_to_n % 2 == 1:
             maria_wins += 1
         else:
             ben_wins += 1
+        rounds += 1
 
     # Determine the overall winner
     if maria_wins > ben_wins:
