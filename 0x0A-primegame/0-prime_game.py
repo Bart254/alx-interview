@@ -6,7 +6,7 @@
 def isWinner(x, nums):
     """Precompute all prime numbers
     """
-    if x == 0 or len(nums) == 0:
+    if x <= 0 or len(nums) == 0 or x > len(nums):
         return None
     max_num = max(nums) if x > 0 else 0
     sieve = [True] * (max_num + 1)
