@@ -4,7 +4,8 @@
 
 
 def isWinner(x, nums):
-    # Precompute all prime numbers
+    """Precompute all prime numbers
+    """
     max_num = max(nums) if x > 0 else 0
     sieve = [True] * (max_num + 1)
     sieve[0] = sieve[1] = False  # 0 and 1 are not primes
