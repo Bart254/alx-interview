@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+""" Prime game algorithm
+"""
+
+
 def sieve_of_eratosthenes(n):
     """ prime algorithm
     """
@@ -9,6 +13,7 @@ def sieve_of_eratosthenes(n):
             for j in range(i * i, n + 1, i):
                 primes[j] = False
     return primes
+
 
 def isWinner(x, nums):
     """ determine winner
